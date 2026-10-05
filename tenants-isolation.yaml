@@ -1,0 +1,48 @@
+---
+# ==========================================
+# TENANT STANDARD A: Namespace & Quotas
+# ==========================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-standard-a
+  labels:
+    tier: standard
+    tenant: alpha
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: standard-tier-quota
+  namespace: tenant-standard-a
+spec:
+  hard:
+    requests.cpu: "200m"
+    requests.memory: "256Mi"
+    limits.cpu: "500m"
+    limits.memory: "512Mi"
+    pods: "5"
+---
+# ==========================================
+# TENANT ENTERPRISE X: Namespace & Quotas
+# ==========================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-enterprise-x
+  labels:
+    tier: enterprise
+    tenant: enterprise-x
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: enterprise-tier-quota
+  namespace: tenant-enterprise-x
+spec:
+  hard:
+    requests.cpu: "500m"
+    requests.memory: "512Mi"
+    limits.cpu: "1000m"
+    limits.memory: "1Gi"
+    pods: "10"

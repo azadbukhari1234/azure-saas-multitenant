@@ -1,0 +1,29 @@
+---
+# Deny all ingress traffic from other namespaces for Standard Tier Tenant A
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-cross-namespace
+  namespace: tenant-standard-a
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    # Allow traffic ONLY from pods within the same namespace
+    - from:
+        - podSelector: {}
+---
+# Deny all ingress traffic from other namespaces for Enterprise Tier Tenant X
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-cross-namespace
+  namespace: tenant-enterprise-x
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector: {}
